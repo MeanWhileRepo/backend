@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 var User = new Schema({
   uuid: {
-    type: Number,
+    type: String,
     unique: true
   },
   firstName: {
@@ -72,7 +72,7 @@ User.pre("save", function(next) {
 
   // full name from first name and last Name
   if (doc.isModified("firstName") || doc.isModified("lastName")) {
-    doc.full_name = doc.firstName + " " + doc.lastName;
+    doc.fullName = doc.firstName + " " + doc.lastName;
   }
 
   next();

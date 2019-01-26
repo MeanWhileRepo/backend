@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+var uuid = require("uuid/v4");
 
 //get all users
 exports.getUser = (req, res, next) => {
@@ -19,24 +20,13 @@ exports.getUser = (req, res, next) => {
 
 //add new user
 exports.addUser = (req, res, next) => {
-  //   res.json({
-  //     uuid: "124345",
-  //     firstName: req.body.firstName,
-  //     lastName: req.body.lastName,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //     create_ts: Date.now(),
-  //     status: "inactive".toLocaleUpperCase()
-  //   });
-
   let userObj = {
-    uuid: "124345",
+    uuid: uuid(),
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
-    create_ts: Date.now(),
-    status: "inactive".toLocaleUpperCase()
+    create_ts: Date.now()
   };
   var user = new User(userObj);
   user.save(function(err) {
