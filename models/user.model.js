@@ -78,4 +78,9 @@ User.pre("save", function(next) {
   next();
 });
 
+//password verify
+User.methods.verifyPassword = function(password) {
+  return this.password === sha1(password + this.salt);
+};
+
 module.exports = module.exports = mongoose.model("User", User);
