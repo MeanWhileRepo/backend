@@ -3,7 +3,7 @@ var uuid = require("uuid/v4");
 var tokenizer = require("./../utils/tokenizer");
 
 //get all users
-exports.getUser = (req, res, next) => {
+exports.getUsers = (req, res, next) => {
   User.find()
     .then(users => {
       res.json({
@@ -17,6 +17,14 @@ exports.getUser = (req, res, next) => {
         message: error.message
       });
     });
+};
+
+//get single user
+exports.getUser = function(req, res, next) {
+  User.findOne({ uuid: req.params.uuid }, function(err, user) {
+    if (!user) return next("No user found");
+    res.json({ error: false, message: "single user", data: user });
+  });
 };
 
 //add new user
